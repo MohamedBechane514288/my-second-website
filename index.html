@@ -3,47 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <title>مؤقت تنازلي</title>
-</head>
-<body style="display: flex; flex-direction: column; height: 100vh; justify-content: center; align-items: center; gap: 10px;">
-
-<h1 id="timer">3</h1>
-<h1 id="counter">0</h1>
-<button id="btnStart" onclick="hello()" style="height: 22px;">Start</button>
-<button id="btnClick" onclick="Hi()" style="display: none; height: 22px;">Click</button>
-
-<script>
-  let btnStart = document.getElementById("btnStart");
-  let btnClick = document.getElementById("btnClick");
-  let timer = document.getElementById("timer");
-  let counter = document.getElementById("counter");
-
-  let countdownValue;
-  let clickCount = 0;
-
-  function hello() {
-    countdownValue = 3;
-    timer.textContent = countdownValue;
-    btnStart.style.display = "none";
-    btnClick.style.display = "block";
-
-    let x = setInterval(() => {
-      countdownValue--;
-      timer.textContent = countdownValue;
-
-      if (countdownValue === 0) {
-        clearInterval(x);
-        btnClick.disabled = true;
-      }
-    }, 1000);
-  }
-
-  function Hi() {
-    if (countdownValue > 0) {
-      clickCount++;
-      counter.textContent = clickCount;
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
     }
-  }
-</script>
+
+    body {
+      background: linear-gradient(to bottom, #f3f4f6, #e5e7eb);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      color: #1f2937;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #btnStart {
+      background-color: #10b981;
+      color: white;
+    }
+
+    #btnStart:hover {
+      background-color: #059669;
+    }
+
+    #btnClick {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    #btnClick:hover {
+      background-color: #2563eb;
+    }
+
+    #btnClick:disabled {
+      background-color: #9ca3af;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="timer">3</h1>
+  <h1 id="counter">0</h1>
+
+  <button id="btnStart" onclick="startCountdown()">ابدأ</button>
+  <button id="btnClick" onclick="clickCounter()" style="display: none;">اضغط</button>
+
+  <script>
+    let btnStart = document.getElementById("btnStart");
+    let btnClick = document.getElementById("btnClick");
+    let timer = document.getElementById("timer");
+    let counter = document.getElementById("counter");
+
+    let countdownValue;
+    let clickCount = 0;
+
+    function startCountdown() {
+      countdownValue = 3;
+      timer.textContent = countdownValue;
+      clickCount = 0;
+      counter.textContent = clickCount;
+      btnStart.style.display = "none";
+      btnClick.style.display = "inline-block";
+      btnClick.disabled = false;
+
+      let interval = setInterval(() => {
+        countdownValue--;
+        timer.textContent = countdownValue;
+
+        if (countdownValue === 0) {
+          clearInterval(interval);
+          btnClick.disabled = true;
+        }
+      }, 1000);
+    }
+
+    function clickCounter() {
+      if (countdownValue > 0) {
+        clickCount++;
+        counter.textContent = clickCount;
+      }
+    }
+  </script>
 
 </body>
 </html>
