@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>مؤقت تنازلي</title>
+</head>
+<body style="display: flex; flex-direction: column; height: 100vh; justify-content: center; align-items: center; gap: 10px;">
+
+<h1 id="timer">3</h1>
+<h1 id="counter">0</h1>
+<button id="btnStart" onclick="hello()" style="height: 22px;">Start</button>
+<button id="btnClick" onclick="Hi()" style="display: none; height: 22px;">Click</button>
+
+<script>
+  let btnStart = document.getElementById("btnStart");
+  let btnClick = document.getElementById("btnClick");
+  let timer = document.getElementById("timer");
+  let counter = document.getElementById("counter");
+
+  let countdownValue;
+  let clickCount = 0;
+
+  function hello() {
+    countdownValue = 3;
+    timer.textContent = countdownValue;
+    btnStart.style.display = "none";
+    btnClick.style.display = "block";
+
+    let x = setInterval(() => {
+      countdownValue--;
+      timer.textContent = countdownValue;
+
+      if (countdownValue === 0) {
+        clearInterval(x);
+        btnClick.disabled = true;
+      }
+    }, 1000);
+  }
+
+  function Hi() {
+    if (countdownValue > 0) {
+      clickCount++;
+      counter.textContent = clickCount;
+    }
+  }
+</script>
+
+</body>
+</html>
